@@ -1,16 +1,20 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { WithChildren } from "@/model/common";
+import type { Layout } from "@/model/layout";
+import Header from "@/components/header/header";
 
 export const metadata: Metadata = {
   title: "Next Food App",
-  description: "Next Food App where you can order learn to cook your next food",
+  description: "Delicious meals, shared by a food-loving community.",
 };
 
-export default function RootLayout({ children }: WithChildren) {
+export default function RootLayout({ children }: Layout) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
