@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import classes from "./header.module.css";
-import Logo from "@/assets/logo.png";
+import logoImg from "@/assets/logo.png";
 import HeaderBackground from "@/components/header/header-background";
 import appRoutes from "@/common/appRoutes";
+import NavLink from "./nav-link";
 
 export default function Header() {
   return (
@@ -11,17 +12,17 @@ export default function Header() {
       <HeaderBackground />
       <header className={classes.header}>
         <Link href={appRoutes.ROOT} className={classes.logo}>
-          <Image src={Logo} alt="A plate with a food on it" priority />
+          <Image src={logoImg} alt="A plate with a food on it" priority />
           Next Food App
         </Link>
 
         <nav className={classes.nav}>
           <ul>
             <li>
-              <Link href={appRoutes.MEALS}>Browse Meals</Link>
+              <NavLink href={appRoutes.MEALS}>Browse Meals</NavLink>
             </li>
             <li>
-              <Link href={appRoutes.COMMUNITY}>Foodies Community</Link>
+              <NavLink href={appRoutes.COMMUNITY}>Foodies Community</NavLink>
             </li>
           </ul>
         </nav>
