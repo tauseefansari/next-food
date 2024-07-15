@@ -1,7 +1,41 @@
+import Image from "next/image";
+import classes from "./page.module.css";
+import { getMeal } from "@/lib/meals";
+import { notFound } from "next/navigation";
+
 type Props = {
   params: { mealSlug: string };
 };
 
-export default function MealDetailsPage({ params }: Props) {
-  return <div>Meal Detail Page {params.mealSlug}</div>;
+export default function MealDetailsPage({ params: { mealSlug } }: Props) {
+  const meal = getMeal(mealSlug);
+
+  if (!meal) notFound();
+
+  const { title, image, creator, creator_email, summary, instructions } = meal;
+
+  return (
+    <>
+      <header className={classes.header}>
+        <div className={classes.image}>
+          <Image src={image} alt={title} fill />
+        </div>
+        <div className={classes.headerText}>
+          <h1>{title}</h1>
+          <p className={classes.creator}>
+            by <a href={`mailto:${creator_email}`}>{creator}</a>
+          </p>
+          <p className={classes.summary}>{summary}</p>
+        </div>
+      </header>
+      <main>
+        <p
+          className={classes.instructions}
+          dangerouslySetInnerHTML={{
+            __html: instructions.replace(/\n/g, "<br />"),
+          }}
+        />
+      </main>
+    </>
+  );
 }
