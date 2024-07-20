@@ -2,10 +2,21 @@ import Image from "next/image";
 import classes from "./page.module.css";
 import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 type Props = {
   params: { mealSlug: string };
 };
+
+export async function generateMetadata({
+  params: { mealSlug },
+}: Props): Promise<Metadata> {
+  const meal = getMeal(mealSlug);
+
+  if (!meal) notFound();
+
+  return { title: meal?.title, description: meal?.summary };
+}
 
 export default function MealDetailsPage({ params: { mealSlug } }: Props) {
   const meal = getMeal(mealSlug);
