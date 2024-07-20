@@ -4,18 +4,10 @@ import Input from "@/components/meals/input";
 import classes from "./page.module.css";
 import ImagePicker from "@/components/meals/image-picker";
 import MealsFormSubmit from "@/components/meals/meals-form-submit";
-import { MealInputs, MealsFormState } from "@/model/meal";
+import { formInputs } from "@/components/meals/meal-constants";
+import { MealsFormState } from "@/model/meal";
 import { shareMeal } from "@/lib/actions";
 import { useFormState } from "react-dom";
-
-export const formInputs: MealInputs = {
-  creator: "name",
-  creator_email: "email",
-  title: "title",
-  summary: "summary",
-  instructions: "instructions",
-  image: "image",
-};
 
 const initialState: MealsFormState = { message: null };
 
