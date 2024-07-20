@@ -10,3 +10,9 @@ export type Meal = {
 };
 
 export type Meals = Meal[];
+
+export type MealInputs = Omit<Meal, "id" | "slug">;
+
+export type MealStoreInputs = Omit<MealInputs, "image"> & { image: File };
+
+export type StoreMeal = Omit<Meal, "id">;

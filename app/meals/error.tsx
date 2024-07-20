@@ -1,4 +1,5 @@
 "use client";
+
 import classes from "@/app/error-notfound.module.css";
 
 type Props = {
