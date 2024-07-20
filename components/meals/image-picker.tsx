@@ -1,15 +1,23 @@
 "use client";
 
-import { ChangeEvent, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+  useRef,
+  useState,
+} from "react";
 import classes from "./image-picker.module.css";
 import Image from "next/image";
 
-type Props = {
+type Props = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+> & {
   label: string;
-  name: string;
 };
 
-export default function ImagePicker({ label, name }: Props) {
+export default function ImagePicker({ label, name, ...rest }: Props) {
   const [pickedImage, setPickedImage] = useState<string | ArrayBuffer | null>(
     null
   );
@@ -60,6 +68,7 @@ export default function ImagePicker({ label, name }: Props) {
           ref={imageInputRef}
           onChange={handleChangeImage}
           required
+          {...rest}
         />
         <button
           className={classes.button}

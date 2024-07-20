@@ -44,6 +44,7 @@ export default function Input<
           placeholder={label}
           name={name}
           id={name}
+          required
           {...(rest as TextareaProps)}
         />
       ) : (
@@ -53,6 +54,7 @@ export default function Input<
           type={type}
           id={name}
           name={name}
+          required
           {...(rest as InputProps)}
         />
       )}

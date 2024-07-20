@@ -1,8 +1,12 @@
+"use client";
+
 import Input from "@/components/meals/input";
 import classes from "./page.module.css";
 import ImagePicker from "@/components/meals/image-picker";
-import { MealInputs } from "@/model/meal";
+import MealsFormSubmit from "@/components/meals/meals-form-submit";
+import { MealInputs, MealsFormState } from "@/model/meal";
 import { shareMeal } from "@/lib/actions";
+import { useFormState } from "react-dom";
 
 export const formInputs: MealInputs = {
   creator: "name",
@@ -13,7 +17,11 @@ export const formInputs: MealInputs = {
   image: "image",
 };
 
+const initialState: MealsFormState = { message: null };
+
 export default function ShareMealPage() {
+  const [{ message }, formAction] = useFormState(shareMeal, initialState);
+
   return (
     <>
       <header className={classes.header}>
@@ -23,25 +31,24 @@ export default function ShareMealPage() {
         <p>Or any other meal you feel needs sharing!</p>
       </header>
       <main className={classes.main}>
-        <form className={classes.form} action={shareMeal}>
+        <form className={classes.form} action={formAction}>
           <div className={classes.row}>
             <p>
-              <Input label="Your name" name={formInputs.creator} required />
+              <Input label="Your name" name={formInputs.creator} />
             </p>
             <p>
               <Input
                 label="Your email"
                 type="email"
                 name={formInputs.creator_email}
-                required
               />
             </p>
           </div>
           <p>
-            <Input label="Title" name={formInputs.title} required />
+            <Input label="Title" name={formInputs.title} />
           </p>
           <p>
-            <Input label="Short Summary" name={formInputs.summary} required />
+            <Input label="Short Summary" name={formInputs.summary} />
           </p>
           <p>
             <Input
@@ -49,12 +56,12 @@ export default function ShareMealPage() {
               type="textarea"
               rows={10}
               name={formInputs.instructions}
-              required
             />
           </p>
           <ImagePicker label="Your Image" name={formInputs.image} />
+          {message && <p className={classes.error}>{message}</p>}
           <p className={classes.actions}>
-            <button type="submit">Share Meal</button>
+            <MealsFormSubmit />
           </p>
         </form>
       </main>

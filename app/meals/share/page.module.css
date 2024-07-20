@@ -67,3 +67,14 @@
   color: #979797;
   cursor: not-allowed;
 }
+
+.error {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #dad5d5;
+  background: linear-gradient(90deg, #f9572a, #ffc905);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Montserrat", sans-serif;
+}

@@ -9,6 +9,8 @@ export type Meal = {
   creator_email: string;
 };
 
+export type MealsFormState = { message: string | null };
+
 export type Meals = Meal[];
 
 export type MealInputs = Omit<Meal, "id" | "slug">;
