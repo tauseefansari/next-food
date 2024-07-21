@@ -2,6 +2,9 @@
 
 Welcome to the **Next Food App**! This project showcases a comprehensive web application built with the latest technologies to provide a delightful user experience for sharing and exploring meal recipes. The app leverages **TypeScript**, **Next.js Server Components**, and the **Next.js App Router** to create a robust, scalable, and maintainable application structure.
 
+## Demo
+Visit the App [Live](https://next-food-nextjs.vercel.app/)
+
 ## Getting Started
 
 To get started with the Next Food App, follow these steps:
