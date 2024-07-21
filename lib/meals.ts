@@ -19,7 +19,7 @@ export const saveMeal = async ({
   image,
   ...rest
 }: MealStoreInputs) => {
-  const slug = title.toLowerCase();
+  const slug = title.replaceAll(" ", "_").toLowerCase();
   const instructions = xss(_instructions);
 
   const extension = image.name.split(".").pop();

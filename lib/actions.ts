@@ -1,7 +1,7 @@
 "use server";
 
 import { formInputs } from "@/components/meals/meal-constants";
-import { MealsFormState, MealStoreInputs } from "@/model/meal";
+import { MealShareFormState, MealStoreInputs } from "@/model/meal";
 import { saveMeal } from "./meals";
 import { redirect } from "next/navigation";
 import appRoutes from "@/common/appRoutes";
@@ -13,9 +13,9 @@ const isInvalidText = (textOrFile: string | File) => {
 };
 
 export const shareMeal = async (
-  _prevState: MealsFormState,
+  _prevState: MealShareFormState,
   formData: FormData
-): Promise<MealsFormState> => {
+): Promise<MealShareFormState> => {
   const meal = Object.entries(formInputs).reduce((acc, [key, value]) => {
     const formValue = formData.get(value);
     if (formValue)
@@ -25,7 +25,7 @@ export const shareMeal = async (
     return acc;
   }, {} as MealStoreInputs);
 
-  if (!Object.values(meal).some(isInvalidText))
+  if (Object.values(meal).some(isInvalidText))
     return { message: "Invalid Input, please fill all the input values" };
 
   await saveMeal(meal);
