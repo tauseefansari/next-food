@@ -8,6 +8,8 @@ type Props = {
   params: { mealSlug: string };
 };
 
+export const dynamicParams = true;
+
 export async function generateMetadata({
   params: { mealSlug },
 }: Props): Promise<Metadata> {
@@ -15,7 +17,7 @@ export async function generateMetadata({
 
   if (!meal) notFound();
 
-  return { title: meal?.title, description: meal?.summary };
+  return { title: meal.title, description: meal.summary };
 }
 
 export default function MealDetailsPage({ params: { mealSlug } }: Props) {
