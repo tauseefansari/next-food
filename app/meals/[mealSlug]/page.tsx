@@ -1,6 +1,6 @@
 import Image from "next/image";
 import classes from "./page.module.css";
-import { getMeal } from "@/lib/meals";
+import { getMeal, getMealsSlugs } from "@/lib/meals";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
@@ -8,14 +8,18 @@ type Props = {
   params: { mealSlug: string };
 };
 
-export const dynamicParams = true;
+export const dynamic = "force-static";
+
+export async function generateStaticParams(): Promise<string[]> {
+  const mealSlugs = getMealsSlugs();
+
+  return mealSlugs.map((mealSlug) => mealSlug);
+}
 
 export async function generateMetadata({
   params: { mealSlug },
 }: Props): Promise<Metadata> {
-  const meal = await getMeal(mealSlug);
-
-  console.log("generateMetadata", { meal });
+  const meal = getMeal(mealSlug);
 
   if (!meal) notFound();
 
@@ -23,9 +27,7 @@ export async function generateMetadata({
 }
 
 export default async function MealDetailsPage({ params: { mealSlug } }: Props) {
-  const meal = await getMeal(mealSlug);
-
-  console.log("MealDetailsPage", { meal });
+  const meal = getMeal(mealSlug);
 
   if (!meal) notFound();
 
