@@ -1,6 +1,6 @@
 import Image from "next/image";
 import classes from "./page.module.css";
-import { getMeal } from "@/lib/meals";
+import { getMeal, getMealsSlugs } from "@/lib/meals";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
@@ -8,7 +8,13 @@ type Props = {
   params: { mealSlug: string };
 };
 
-export const dynamicParams = true;
+export const dynamicParams = false;
+
+export async function generateStaticParams(): Promise<string[]> {
+  const mealSlugs = getMealsSlugs();
+
+  return mealSlugs.map((mealSlug) => mealSlug);
+}
 
 export async function generateMetadata({
   params: { mealSlug },
