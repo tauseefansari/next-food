@@ -10,7 +10,7 @@ const db = sql(DATABASE_NAME);
 export const getMeals = async () =>
   db.prepare<Meals, Meal>("SELECT * FROM meals").all();
 
-export const getMeal = (mealSlug: string) =>
+export const getMeal = async (mealSlug: string) =>
   db.prepare<string, Meal>("SELECT * FROM meals WHERE slug = ?").get(mealSlug);
 
 export const saveMeal = async ({

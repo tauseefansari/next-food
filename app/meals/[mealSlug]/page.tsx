@@ -13,7 +13,7 @@ export const dynamicParams = true;
 export async function generateMetadata({
   params: { mealSlug },
 }: Props): Promise<Metadata> {
-  const meal = getMeal(mealSlug);
+  const meal = await getMeal(mealSlug);
 
   console.log("generateMetadata", { meal });
 
@@ -23,7 +23,7 @@ export async function generateMetadata({
 }
 
 export default async function MealDetailsPage({ params: { mealSlug } }: Props) {
-  const meal = getMeal(mealSlug);
+  const meal = await getMeal(mealSlug);
 
   console.log("MealDetailsPage", { meal });
 
